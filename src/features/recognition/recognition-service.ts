@@ -20,14 +20,14 @@ export interface RecognitionResult {
 
 export interface RecognitionService {
   readonly mode: "prototype-mock" | "production";
-  recognizeFromFrame(hint?: { personId?: string }): Promise<RecognitionResult>;
+  recognizeFromFrame(hint?: { personId?: string | undefined }): Promise<RecognitionResult>;
 }
 
 class MockRecognitionService implements RecognitionService {
   readonly mode = "prototype-mock" as const;
   private cursor = 0;
 
-  async recognizeFromFrame(hint?: { personId?: string }): Promise<RecognitionResult> {
+  async recognizeFromFrame(hint?: { personId?: string | undefined }): Promise<RecognitionResult> {
     await new Promise((r) => setTimeout(r, 1600));
     const enrolled = people.filter((p) => p.hasRecognitionProfile);
     const person = hint?.personId

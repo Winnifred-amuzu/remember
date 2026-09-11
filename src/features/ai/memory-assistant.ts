@@ -66,7 +66,7 @@ export function searchMemories(query: string): Memory[] {
 
 const NO_INFO = "I don't have that information yet.";
 
-export function answer(question: string, context?: { personId?: string }): GroundedAnswer {
+export function answer(question: string, context?: { personId?: string | undefined }): GroundedAnswer {
   const q = normalize(question);
 
   // Location intent

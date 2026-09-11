@@ -2,7 +2,7 @@ import { useState } from "react";
 import { answer, suggestedQuestions } from "@/features/ai/memory-assistant";
 import { useSpeech } from "@/features/voice/use-speech";
 
-export function AIAssistant({ personId }: { personId?: string }) {
+export function AIAssistant({ personId }: { personId?: string | undefined }) {
   const { listening, supported, listen, stop, speak } = useSpeech();
   const [question, setQuestion] = useState<string | null>(null);
   const [reply, setReply] = useState<string | null>(null);
