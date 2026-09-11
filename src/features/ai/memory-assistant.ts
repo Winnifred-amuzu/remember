@@ -100,7 +100,7 @@ export function answer(question: string, context?: { personId?: string }): Groun
   if (subject) {
     const theirs = memories.filter((m) => m.peopleIds.includes(subject.id));
     if (theirs.length === 0) return { text: NO_INFO, sources: [], grounded: false };
-    const latest = theirs.sort((a, b) => b.date.localeCompare(a.date))[0];
+    const latest = theirs.sort((a, b) => b.date.localeCompare(a.date))[0]!;
     return {
       text: `${subject.name} is ${subject.relationship.toLowerCase()}. ${subject.bio} ${latest.narration}`,
       sources: [`Person: ${subject.name}`, `Memory: ${latest.title}`],
@@ -109,7 +109,7 @@ export function answer(question: string, context?: { personId?: string }): Groun
   }
 
   if (found.memories.length > 0) {
-    const m = found.memories[0];
+    const m = found.memories[0]!;
     const who = m.peopleIds.map((id) => getPerson(id)?.name).filter(Boolean).join(", ");
     return {
       text: `${m.narration} That was ${m.displayDate}, with ${who}.`,

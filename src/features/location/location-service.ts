@@ -22,9 +22,11 @@ export interface SafetyState {
   message: string;
 }
 
+const HOME = places[0]!;
+
 export const DEMO_POSITION: Position = {
-  lat: places[0].lat,
-  lng: places[0].lng,
+  lat: HOME.lat,
+  lng: HOME.lng,
   accuracyM: 12,
   timestamp: Date.now(),
   source: "demo-seed",
@@ -32,8 +34,8 @@ export const DEMO_POSITION: Position = {
 
 /** Simulated wander used by the caregiver demo to trigger a safe-zone alert. */
 export const DEMO_OUTSIDE_POSITION: Position = {
-  lat: places[0].lat + 0.0085,
-  lng: places[0].lng - 0.004,
+  lat: HOME.lat + 0.0085,
+  lng: HOME.lng - 0.004,
   accuracyM: 18,
   timestamp: Date.now(),
   source: "demo-seed",
@@ -53,7 +55,7 @@ export function distanceMeters(a: { lat: number; lng: number }, b: { lat: number
 export function nearestPlace(pos: Position) {
   return places
     .map((p) => ({ place: p, distance: distanceMeters(pos, p) }))
-    .sort((a, b) => a.distance - b.distance)[0];
+    .sort((a, b) => a.distance - b.distance)[0]!;
 }
 
 export function evaluateSafety(pos: Position): SafetyState {
